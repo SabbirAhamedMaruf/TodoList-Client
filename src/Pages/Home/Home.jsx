@@ -1,7 +1,9 @@
+import Navbar from "../Shared/Navbar";
+
 const Home = () => {
     return (
-        <div>
-            Home
+        <div className="w-[90vw] m-auto pt-3">
+            <Navbar/>
         </div>
     );
 };
