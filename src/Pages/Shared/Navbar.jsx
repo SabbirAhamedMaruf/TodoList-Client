@@ -42,11 +42,11 @@ const Navbar = () => {
 
       <div className="navbar-end ">
         <div className="relative">
-          <button className="bg-gradient-to-r from-green-400 to-green-600 text-white font-bold px-2 py-1 md:px-3 lg:px-4 lg:py-2 rounded-md">
+          <button className="bg-gradient-to-r from-[#18b985] to-[#18dc9e] text-white font-bold px-2 py-1 md:px-3 lg:px-4 lg:py-2 rounded-md">
             Login
           </button>
           <Link to="/rooms">
-            <button className="bg-gradient-to-l from-green-400 to-green-600 text-white font-bold px-2 py-1 md:px-3 lg:px-4 lg:py-2 rounded-md absolute inset-0 opacity-0 transition duration-700 hover:opacity-100">
+            <button className="bg-gradient-to-l from-[#18b985] to-[#18dc9e] text-white font-bold px-2 py-1 md:px-3 lg:px-4 lg:py-2 rounded-md absolute inset-0 opacity-0 transition duration-700 hover:opacity-100">
               Login
             </button>
           </Link>
