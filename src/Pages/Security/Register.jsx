@@ -1,10 +1,87 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import registerlogo from "../../assets/register.jpg";
 import Navbar from "../Shared/Navbar";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { SecurityContext } from "../../Provider/SecurityProvider";
+import axios from "axios";
+import { NotificationContext } from "../../Hooks/Notification";
+import RegisterForm from "./RegisterForm";
+
+// Adding a generel instants for imgBB API for photo hosting
+const imageHostingAPI = `https://api.imgbb.com/1/upload?key=${
+  import.meta.env.VITE_IMGBBAPIKEY
+}`;
 
 const Register = () => {
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
+  const [disabled, setDisabled] = useState(true);
+  const navigate = useNavigate();
+  const {
+    registerUserWithEmailAndPassword,
+    handleUpdateUserPhoto,
+    handleSignOut,
+  } = useContext(SecurityContext);
+  const { handleSuccessToast, handleErrorToast } =
+    useContext(NotificationContext);
+
+  // Handle password validation
+  const handlePasswordValidation = (e) => {
+    e.preventDefault();
+    if (e.target.value.length === 0) {
+      setError(null);
+      setDisabled(true);
+      return;
+    } else if (e.target.value.length < 6) {
+      setError("Password should be at least 6 character");
+      setDisabled(true);
+      return;
+    } else if (!/[A-Z]/.test(e.target.value)) {
+      setError("Password should contain at least one uppercase letter!");
+      setDisabled(true);
+      return;
+    } else if (!/[$#&|@%*]/.test(e.target.value)) {
+      setError("Password should contain at least one special letter!");
+      setDisabled(true);
+      return;
+    } else {
+      setError(null);
+      setDisabled(false);
+      return;
+    }
+  };
+
+  // Create user using email and password function
+  const createUserUsingEmailAndPassword = async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const username = form.name.value;
+    const useremail = form.email.value;
+    const userpassword = form.password.value;
+
+    // getting user photo
+    const formData = new FormData();
+    formData.append("image", form.photo.files[0]);
+    // Hosting user photo inside imgbb
+    const result = await axios.post(imageHostingAPI, formData);
+    const userphoto = result.data.data.display_url;
+
+    // Sending credential to firebase
+    registerUserWithEmailAndPassword(useremail, userpassword)
+      .then((res) => {
+        // updating user name and photo
+        handleUpdateUserPhoto(res.user, username, userphoto);
+        handleSignOut();
+        navigate("/login");
+        handleSuccessToast("User created successfully!");
+      })
+      .catch((error) => {
+        if (error.message.includes("auth/email-already-in-use")) {
+          handleErrorToast("This email is already registerd!");
+        } else {
+          handleErrorToast(error.message);
+        }
+      });
+  };
 
   return (
     <div className="lg:w-[90%] m-auto pt-3">
@@ -15,83 +92,14 @@ const Register = () => {
         <div className="lg:w-1/2 bg-white">
           <img src={registerlogo} className="px-10 lg:px-0" />
         </div>
-        <div className=" space-y-3">
-          <h1 className="text-center font-bold text-2xl md:text-3xl lg:text-4xl mb-10">
-            Register
-          </h1>
-          <form className="flex flex-col space-y-8">
-            <div className="flex items-center gap-14">
-              <label
-                className="text-[15px] lg:text-xl font-semibold"
-                htmlFor="name"
-              >
-                Name
-              </label>
-              <input
-                className="w-[60vw] lg:w-[30vw] py-2 px-2 bg-green-100 rounded-md outline-none"
-                type="text"
-                name="name"
-                placeholder="Enter your name"
-              />
-            </div>
-            <div className="flex items-center gap-14">
-              <label
-                className="text-[15px] lg:text-xl font-semibold"
-                htmlFor="photo"
-              >
-                Photo
-              </label>
-              <input
-                className="w-[60vw] lg:w-[30vw] py-1 px-2 bg-green-100 rounded-md outline-none"
-                type="file"
-                name="photo"
-              />
-            </div>
-            <div className="flex items-center gap-14">
-              <label
-                className="text-[15px] lg:text-xl font-semibold"
-                htmlFor="email"
-              >
-                Email
-              </label>
-              <input
-                className="w-[60vw] lg:w-[30vw] py-2 px-2 bg-green-100 rounded-md outline-none"
-                type="email"
-                name="email"
-                placeholder="Enter your email"
-              />
-            </div>
-            <div className="flex items-center gap-7 lg:gap-5">
-              <label
-                className="text-[15px] lg:text-xl font-semibold"
-                htmlFor="password"
-              >
-                Password
-              </label>
-              <input
-                className="w-[60vw] lg:w-[30vw] py-2 px-2 bg-green-100 rounded-md outline-none"
-                type="password"
-                name="password"
-                placeholder="Enter your password"
-              />
-            </div>
 
-            <input
-              className="text-center text-xl text-white font-bold rounded-md  py-2 bg-black lg:bg-green-500 transition-colors duration-700 hover:bg-[#fb9c00]"
-              type="submit"
-              value="Submit"
-            />
-          </form>
-          <div className="text-center space-y-3">
-            <p>
-              Alredy Registerd?{" "}
-              <Link to="/login" className="font-bold hover:text-green-500">
-                Click Here
-              </Link>
-            </p>
-            <p>Error message goes here</p>
-          </div>
-        </div>
+        {/* Separated form of Register inside Register From Component */}
+        <RegisterForm
+          error={error}
+          disabled={disabled}
+          handlePasswordValidation={handlePasswordValidation}
+          createUserUsingEmailAndPassword={createUserUsingEmailAndPassword}
+        ></RegisterForm>
       </div>
     </div>
   );
