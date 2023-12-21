@@ -11,12 +11,13 @@ const Login = () => {
         <Navbar />
       </div>
       <div className="lg:w-[90%] lg:m-auto bg-green-300 lg:bg-transparent flex flex-col lg:flex-row gap-10 lg:gap-20 items-center pb-10 lg:pb-0">
-        <div className="lg:w-1/2">
-          <img src={login} />
+        <div className="lg:w-1/2 bg-white">
+          <img src={login} className="px-10 lg:px-0"/>
         </div>
         <div className=" space-y-3">
+          <h1 className="text-center font-bold text-2xl md:text-3xl lg:text-4xl mb-10">Login</h1>
           <form className="flex flex-col space-y-8">
-            <div className="flex items-center gap-4 md:grid grid-cols-5 lg:grid-cols-7">
+          <div className="flex items-center gap-14">
               <label
                 className="text-[15px] lg:text-xl font-semibold"
                 htmlFor="email"
@@ -24,13 +25,13 @@ const Login = () => {
                 Email
               </label>
               <input
-                className="ml-7 md:ml-6 lg:ml-5 col-span-4 lg:col-span-6 px-2 py-2 bg-green-50 outline-none"
+                className="w-[60vw] lg:w-[30vw] py-2 px-2 bg-green-100 rounded-md outline-none"
                 type="email"
                 name="email"
                 placeholder="Enter your email"
               />
             </div>
-            <div className="flex items-center gap-4 md:grid grid-cols-4 lg:grid-cols-7">
+            <div className="flex items-center gap-7 lg:gap-5">
               <label
                 className="text-[15px] lg:text-xl font-semibold"
                 htmlFor="password"
@@ -38,7 +39,7 @@ const Login = () => {
                 Password
               </label>
               <input
-                className="md:ml-2 lg:ml-5 col-span-3 lg:col-span-6 px-2 py-2 bg-green-50 outline-none"
+                className="w-[60vw] lg:w-[30vw] py-2 px-2 bg-green-100 rounded-md outline-none"
                 type="password"
                 name="password"
                 placeholder="Enter your password"
@@ -46,7 +47,7 @@ const Login = () => {
             </div>
 
             <input
-              className="text-center text-xl text-white font-bold rounded-md  py-1 lg:py-2 bg-black lg:bg-green-500 transition-colors duration-700 hover:bg-[#fb9c00]"
+              className="text-center text-xl text-white font-bold rounded-md  py-2 bg-black lg:bg-green-500 transition-colors duration-700 hover:bg-[#fb9c00]"
               type="submit"
               value="Submit"
             />
@@ -62,7 +63,7 @@ const Login = () => {
           <div className="text-center space-y-3">
             <p>
               Not Registerd?{" "}
-              <Link className="font-bold hover:text-green-500">Click Here</Link>
+              <Link to="/register" className="font-bold hover:text-green-500">Click Here</Link>
             </p>
             <p>Error message goes here</p>
           </div>
