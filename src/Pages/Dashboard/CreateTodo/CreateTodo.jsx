@@ -29,7 +29,7 @@ const CreateTodo = () => {
     axiosPublic
       .post("/addtodo", currentTaskData)
       .then(() => {
-        // form.reset();
+        form.reset();
         handleSuccessToast("Todo addded successfully!");
       })
       .catch((error) => {

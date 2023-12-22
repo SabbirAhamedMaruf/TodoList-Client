@@ -44,7 +44,7 @@ const CompleteTask = () => {
       <h1 className="font-semibold text-xl lg:text-2xl">Completed</h1>
       <div
         ref={drop}
-        className="h-[20vh] lg;h-[70vh] p-2 lg:p-10 mb-10 space-y-3 overflow-y-scroll"
+        className="h-[20vh] lg:h-[70vh] p-2 lg:p-10 mb-10 space-y-3 overflow-y-scroll"
       >
         {todosCompletedData.map((todo) => (
           <SingleArrangeTodoData

@@ -8,6 +8,7 @@ import Dashboard from "../Layouts/Dashboard";
 import Overview from "../Pages/Dashboard/Overview/Overview";
 import CreateTodo from "../Pages/Dashboard/CreateTodo/CreateTodo";
 import ArrangeTodo from "../Pages/Dashboard/ArrangeTodo/ArrangeTodo";
+import EditTodos from "../Pages/Dashboard/Overview/EditTodos";
 
 const routes = createBrowserRouter([
     {
@@ -45,6 +46,10 @@ const routes = createBrowserRouter([
             {
                 path:"/dashboard/arrangetodo",
                 element:<ArrangeTodo/>
+            },
+            {
+                path:"/dashboard/editTodo/:id",
+                element:<EditTodos/>
             }
         ]
     }
