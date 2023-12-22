@@ -4,6 +4,33 @@
 @tailwind components;
 @tailwind utilities;
 
-.navbar a.active{
-    color: #00a634;
+.navbar a.active {
+  color: #00a634;
+}
+
+.dashboard a.active button {
+  color: black;
+  font-weight: 600;
+  background-color: white;
+}
+
+/* body {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+body::-webkit-scrollbar {
+  display: none;
+} */
+
+.pagination button{
+  background-color: gray;
+  margin-right: 5px;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  color: white;
+}
+
+.pagination .selected{
+  background-color: #18b985;
 }

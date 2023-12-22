@@ -6,7 +6,7 @@ const Navbar = () => {
       <div className="navbar-start">
         <ul className="hidden lg:block navbar menu menu-horizontal font-bold text-[18px] space-y-3 space-x-5">
           <NavLink to="/">Home</NavLink>
-          <NavLink to="/Dashboard">Dashboard</NavLink>
+          <NavLink to="/dashboard/overview">Dashboard</NavLink>
         </ul>
 
         <div className="dropdown">
@@ -31,7 +31,7 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
             <NavLink to="/">Home</NavLink>
-            <NavLink to="/Dashboard">Dashboard</NavLink>
+            <NavLink to="/dashboard">Dashboard</NavLink>
           </ul>
         </div>
       </div>
@@ -57,3 +57,6 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+// TODO: replace login button with userphoto while user logged in
