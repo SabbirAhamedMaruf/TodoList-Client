@@ -52,14 +52,14 @@ const Overview = () => {
   return (
     <div className="p-10 bg-green-50 h-screen">
       <div className="my-5">
-        <h1 className="text-center text-xl md:text-2xl lg:text-4xl font-semibold ">
+        <h1 className="text-center text-xl md:text-2xl lg:text-4xl font-semibold">
           Your Task
         </h1>
         <div className="flex flex-col">
           <div className="lg:h-[500px] md:w-[60vw]">
             {todos.length === 0 ? (
               <h1 className="text-xl md:text-2xl lg:text-3xl text-red-500 font-semibold text-center mt-60">
-                No donation requests found
+                No task found
               </h1>
             ) : (
               <div className="h-3/4 py-5 ">
@@ -94,7 +94,7 @@ const Overview = () => {
                 </form>
 
                 <div className="overflow-x-auto">
-                  <table className="table  table-zebra space-y-5 text-xl">
+                  <table className="table  table-zebra space-y-5 md:text-[16px] lg:text-xl">
                     <thead>
                       <tr>
                         <th>No.</th>
@@ -108,7 +108,7 @@ const Overview = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {todoData.map((i, index) => (
+                      {todos.map((i, index) => (
                         <SingleTodoData
                           key={i._id}
                           data={i}
