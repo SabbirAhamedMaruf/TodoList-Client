@@ -9,15 +9,15 @@ const ArrangeTodo = () => {
   const [todosData] = useFetchTodos();
   return (
     <div className="p-2 lg:p-10 bg-green-50 h-screen">
-      <h1 className="text-center text-xl md:text-2xl lg:text-4xl font-semibold">
+      <h1 className="hidden lg:block text-center text-xl md:text-2xl lg:text-4xl font-semibold">
         Arrange Task
       </h1>
 
       <DndProvider backend={HTML5Backend}>
-        <div className="flex flex-col lg:flex-row justify-around items-center gap-10 lg:my-5">
-          <div className=" w-[20vw] bg-green-100 shadow-xl rounded-e-md text-center pt-5 ">
-            <h1 className="font-semibold text-2xl">Todo</h1>
-            <div className="h-[70vh] p-10 mb-10 space-y-3 overflow-y-scroll">
+        <div className="flex flex-col lg:flex-row justify-around items-center gap-2 lg:gap-10 lg:my-5">
+          <div className="w-[95vw] md:w-[70vw] lg:w-[20vw] bg-green-100 shadow-xl rounded-e-md text-center pt-5 ">
+            <h1 className="font-semibold  text-xl lg:text-2xl">Todo</h1>
+            <div className="h-[20vh] lg:h-[70vh] p-2 lg:p-10 mb-10 space-y-3 overflow-x-auto lg:overflow-y-scroll">
               {todosData.map((todo) => (
                 <SingleArrangeTodoData
                   key={todo._id}

@@ -9,10 +9,8 @@ import useFetchCompletedTask from "../../../Hooks/useFetchCompletedTask";
 
 const CompleteTask = () => {
   const [todosCompletedData, refetch] = useFetchCompletedTask();
-  const [,refetchProgressTodo]=useFetchOnlyOnProgressTodo();
+  const [, refetchProgressTodo] = useFetchOnlyOnProgressTodo();
   const [, refetchTodos] = useFetchTodos();
-
-
 
   const { handleSuccessToast, handleErrorToast } =
     useContext(NotificationContext);
@@ -42,11 +40,11 @@ const CompleteTask = () => {
   };
 
   return (
-    <div className="w-[20vw] bg-green-100 shadow-xl rounded-e-md text-center pt-5">
-      <h1 className="font-semibold text-2xl">In Progress</h1>
+    <div className="w-[95vw] md:w-[70vw] lg:w-[20vw] bg-green-100 shadow-xl rounded-e-md text-center pt-5">
+      <h1 className="font-semibold text-xl lg:text-2xl">Completed</h1>
       <div
         ref={drop}
-        className="h-[70vh] p-10 mb-10 space-y-3 overflow-y-scroll"
+        className="h-[20vh] lg;h-[70vh] p-2 lg:p-10 mb-10 space-y-3 overflow-y-scroll"
       >
         {todosCompletedData.map((todo) => (
           <SingleArrangeTodoData

@@ -10,9 +10,6 @@ const SingleArrangeTodoData = ({data}) => {
             isDragging: !!monitor.isDragging()
         })
       }))
-
-      console.log(isDragging)
-    
     return (
         <div ref={drag} className='grid grid-cols-6 gap-5 bg-white p-3 rounded-md'>
             <MdOutlineTaskAlt />
